@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#312e81">
+  <meta name="description" content="صفحه پیشنهادی نظرسنجی عمومی دبیرستان پیشتازان">
+  <title>نظرسنجی عمومی | دبیرستان پیشتازان</title>
+  <style>
+    :root {
+      --ink: #18223b;
+      --muted: #64748b;
+      --primary: #4f46e5;
+      --primary-dark: #312e81;
+      --mint: #d1fae5;
+      --line: #e2e8f0;
+      --surface: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.9;
+      background:
+        radial-gradient(ellipse at 90% 0%, #ddd6fe 0, transparent 35%),
+        radial-gradient(ellipse at 0% 35%, #bfdbfe 0, transparent 28%),
+        #f6f7ff;
+      overflow-wrap: anywhere;
+    }
+    header {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+      padding: clamp(42px, 9vw, 76px) 18px 72px;
+      border-radius: 0 0 34px 34px;
+      background: linear-gradient(135deg, #172554 0%, #4338ca 55%, #7c3aed 100%);
+      box-shadow: 0 18px 45px #312e8133;
+    }
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    header::before {
+      width: 240px; height: 240px;
+      top: -125px; right: -65px;
+      border: 1px solid #ffffff55;
+      box-shadow: 0 0 0 22px #ffffff0b, 0 0 0 48px #ffffff0b;
+      animation: float 8s ease-in-out infinite;
+    }
+    header::after {
+      width: 155px; height: 155px;
+      bottom: -100px; left: 7%;
+      background: #ffffff12;
+      animation: float 7s ease-in-out infinite reverse;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 15px;
+      border: 1px solid #ffffff70;
+      border-radius: 999px;
+      background: #ffffff18;
+      font-size: .88rem;
+      backdrop-filter: blur(8px);
+      animation: fadeDown .7s both;
+    }
+    h1 {
+      max-width: 800px;
+      margin: 16px auto 8px;
+      font-size: clamp(1.55rem, 5vw, 2.55rem);
+      line-height: 1.65;
+      animation: fadeUp .75s .08s both;
+    }
+    header p {
+      max-width: 650px;
+      margin: 8px auto 0;
+      color: #e0e7ff;
+      font-size: clamp(.92rem, 2.7vw, 1.05rem);
+      animation: fadeUp .75s .18s both;
+    }
+    .hero-icon {
+      display: grid;
+      place-items: center;
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 15px;
+      border-radius: 22px;
+      background: #ffffff1c;
+      border: 1px solid #ffffff45;
+      font-size: 2rem;
+      box-shadow: 0 10px 30px #0f172a22;
+      animation: popIn .65s both;
+    }
+    main {
+      width: min(760px, calc(100% - 28px));
+      margin: -28px auto 38px;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      padding: clamp(18px, 4vw, 27px);
+      margin-bottom: 18px;
+      border: 1px solid #ffffff;
+      border-radius: 23px;
+      background: #ffffffed;
+      box-shadow: 0 12px 35px #33415512;
+      animation: fadeUp .65s both;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 17px 38px #3341551a;
+    }
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+      padding-bottom: 11px;
+      border-bottom: 2px solid #e0e7ff;
+      color: #3730a3;
+      font-size: clamp(1.05rem, 3.5vw, 1.22rem);
+    }
+    h2 .number {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 34px;
+      height: 34px;
+      border-radius: 11px;
+      color: white;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      font-size: .9rem;
+    }
+    .notice {
+      padding: 15px 16px;
+      border-right: 5px solid #10b981;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      font-size: .92rem;
+    }
+    .field { margin: 17px 0; }
+    label, legend { font-weight: 700; }
+    fieldset { min-width: 0; }
+    input[type="text"], select, textarea {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      margin-top: 8px;
+      padding: 12px 14px;
+      border: 1.5px solid #dbe2f0;
+      border-radius: 14px;
+      color: var(--ink);
+      background: #f8faff;
+      font: inherit;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: #818cf8;
+      background: #fff;
+      box-shadow: 0 0 0 4px #6366f11c;
+    }
+    textarea { min-height: 125px; resize: vertical; }
+    .choices { display: grid; gap: 10px; margin-top: 12px; }
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 13px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 15px;
+      background: #f8faff;
+      font-weight: normal;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .choice:hover { transform: translateX(-2px); border-color: #a5b4fc; }
+    .choice:has(input:checked) {
+      background: #eef2ff;
+      border-color: #818cf8;
+      box-shadow: 0 0 0 3px #6366f112;
+    }
+    .choice input {
+      width: 18px; height: 18px;
+      flex: 0 0 18px;
+      margin: 7px 0 0;
+      accent-color: var(--primary);
+    }
+    button {
+      display: block;
+      width: 100%;
+      min-height: 50px;
+      margin-top: 12px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 15px;
+      color: white;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      font: bold 1rem Tahoma, Arial, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 20px #4f46e530;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      touch-action: manipulation;
+    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px #4f46e540; }
+    button:active { transform: scale(.985); }
+    .secondary { color: #3730a3; background: #eef2ff; box-shadow: none; }
+    .small { color: var(--muted); font-size: .86rem; }
+    .result {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid #bfdbfe;
+      border-radius: 15px;
+      background: #eff6ff;
+      overflow-wrap: anywhere;
+    }
+    .result.show { display: block; animation: fadeUp .35s both; }
+    .result li { margin-bottom: 7px; }
+    footer { padding: 10px 18px 32px; color: var(--muted); text-align: center; font-size: .84rem; }
+    a { color: var(--primary); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.82); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(12px) rotate(5deg); }
+    }
+    @media (max-width: 520px) {
+      header { padding: 38px 16px 58px; border-radius: 0 0 27px 27px; }
+      .hero-icon { width: 58px; height: 58px; border-radius: 19px; font-size: 1.7rem; }
+      main { width: calc(100% - 20px); margin-top: -22px; }
+      .card { border-radius: 19px; margin-bottom: 13px; }
+      .choice { padding: 12px; }
+      button { min-height: 52px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-icon" aria-hidden="true">🎓</div>
+    <span class="badge">✦ صدای شما مهم است</span>
+    <h1>نظرسنجی عمومی دبیرستان پیشتازان</h1>
+    <p>با پاسخ‌دادن به چند پرسش کوتاه، به بهترشدن فضای آموزشی و فرهنگی مدرسه کمک کنید.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="notice">
+        <strong>توجه:</strong> این یک نمونه‌ی نمایشی است. پاسخ‌ها فقط در همین مرورگر نمایش داده می‌شوند و برای مدرسه ارسال یا آنلاین ذخیره نمی‌شوند. برای جمع‌آوری واقعی پاسخ‌ها، باید فرم به یک سرویس مورد تأیید مدرسه متصل شود.
+      </div>
+    </section>
+
+    <form id="survey">
+      <section class="card">
+        <h2><span class="number">۱</span> درباره شما <span class="small">(اختیاری)</span></h2>
+        <div class="field">
+          <label for="role">نقش شما در مدرسه</label>
+          <select id="role" name="role">
+            <option value="">انتخاب کنید</option>
+            <option>دانش‌آموز</option>
+            <option>والدین</option>
+            <option>دبیر یا کادر مدرسه</option>
+            <option>سایر</option>
+          </select>
+        </div>
+        <p class="small">برای حفظ حریم خصوصی، نام، شماره تماس یا اطلاعات شخصی حساس وارد نکنید.</p>
+      </section>
+
+      <section class="card">
+        <h2><span class="number">۲</span> ارزیابی کلی مدرسه</h2>
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend>در مجموع، از فضای مدرسه چقدر رضایت دارید؟</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="satisfaction" value="خیلی زیاد" required> خیلی زیاد</label>
+            <label class="choice"><input type="radio" name="satisfaction" value="زیاد"> زیاد</label>
+            <label class="choice"><input type="radio" name="satisfaction" value="متوسط"> متوسط</label>
+            <label class="choice"><input type="radio" name="satisfaction" value="کم"> کم</label>
+            <label class="choice"><input type="radio" name="satisfaction" value="خیلی کم"> خیلی کم</label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card">
+        <h2><span class="number">۳</span> امکانات و فعالیت‌ها</h2>
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend>کدام بخش‌ها بیشتر نیاز به بهبود دارند؟ (چند گزینه قابل انتخاب است)</legend>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="improve" value="روش‌های آموزشی"> روش‌های آموزشی</label>
+            <label class="choice"><input type="checkbox" name="improve" value="کتابخانه و منابع آموزشی"> کتابخانه و منابع آموزشی</label>
+            <label class="choice"><input type="checkbox" name="improve" value="امکانات ورزشی"> امکانات ورزشی</label>
+            <label class="choice"><input type="checkbox" name="improve" value="برنامه‌های فرهنگی و هنری"> برنامه‌های فرهنگی و هنری</label>
+            <label class="choice"><input type="checkbox" name="improve" value="بهداشت و نظافت"> بهداشت و نظافت</label>
+            <label class="choice"><input type="checkbox" name="improve" value="ارتباط مدرسه با خانواده‌ها"> ارتباط مدرسه با خانواده‌ها</label>
+            <label class="choice"><input type="checkbox" name="improve" value="سایر موارد"> سایر موارد</label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card">
+        <h2><span class="number">۴</span> پیشنهاد شما</h2>
+        <div class="field">
+          <label for="suggestion">چه پیشنهادی برای بهترشدن مدرسه دارید؟ (اختیاری)</label>
+          <textarea id="suggestion" name="suggestion" maxlength="1000" placeholder="پیشنهادتان را محترمانه و بدون ذکر نام افراد بنویسید..."></textarea>
+        </div>
+        <button type="submit">✨ نمایش خلاصه پاسخ من</button>
+        <button type="reset" class="secondary">پاک‌کردن پاسخ‌ها</button>
+        <div class="result" id="result" role="status" aria-live="polite"></div>
+      </section>
+    </form>
+
+    <section class="card">
+      <h2><span class="number">✓</span> درباره این صفحه</h2>
+      <p>این صفحه یک الگوی اولیه برای نظرسنجی عمومی دبیرستان پیشتازان است. پیش از انتشار عمومی، محتوای پرسش‌ها و شیوه جمع‌آوری پاسخ‌ها را با مسئول مدرسه هماهنگ کنید.</p>
+    </section>
+  </main>
+  <footer>طراحی نمونه برای دبیرستان پیشتازان • نظرسنجی محترمانه و سازنده</footer>
+
+  <script>
+    const form = document.getElementById('survey');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const data = new FormData(form);
+      const role = data.get('role') || 'مشخص نشده';
+      const satisfaction = data.get('satisfaction');
+      const improvements = data.getAll('improve');
+      const suggestion = (data.get('suggestion') || '').trim();
+
+      result.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = 'پاسخ شما آماده است (فقط روی همین دستگاه):';
+      result.appendChild(title);
+
+      const lines = [
+        'نقش: ' + role,
+        'رضایت کلی: ' + satisfaction,
+        'موارد پیشنهادی برای بهبود: ' + (improvements.length ? improvements.join('، ') : 'انتخاب نشده'),
+        'پیشنهاد: ' + (suggestion || 'نوشته نشده')
+      ];
+      const ul = document.createElement('ul');
+      lines.forEach(line => {
+        const li = document.createElement('li');
+        li.textContent = line;
+        ul.appendChild(li);
+      });
+      result.appendChild(ul);
+
+      const note = document.createElement('p');
+      note.className = 'small';
+      note.textContent = 'این پاسخ به جایی ارسال نشده است. برای دریافت واقعی پاسخ‌ها، فرم باید به یک سرویس جمع‌آوری پاسخ متصل شود.';
+      result.appendChild(note);
+      result.classList.add('show');
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    form.addEventListener('reset', () => {
+      result.classList.remove('show');
+      result.replaceChildren();
+    });
+  </script>
+</body>
+</html>
